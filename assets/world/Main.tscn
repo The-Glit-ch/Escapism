@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/textures/grid.png" type="Texture" id=1]
+[ext_resource path="res://assets/world/env.tres" type="Environment" id=2]
+[ext_resource path="res://assets/player/Player.tscn" type="PackedScene" id=5]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 500, 500, 0 )
+
+[sub_resource type="BoxShape" id=3]
+
+[node name="World" type="Spatial"]
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0646715, 2.70123, 6.05751 )
+
+[node name="World Env" type="Node" parent="."]
+
+[node name="Light" type="DirectionalLight" parent="World Env"]
+transform = Transform( -1, 0, -8.74228e-08, -4.37114e-08, 0.866025, 0.5, 7.57103e-08, 0.5, -0.866025, 0, 3, 0 )
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World Env"]
+environment = ExtResource( 2 )
+
+[node name="Floor" type="MeshInstance" parent="."]
+transform = Transform( 500, 0, 0, 0, 1, 0, 0, 0, 500, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0, 4, -5 )
+use_collision = true
+height = 9.25883

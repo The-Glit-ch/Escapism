@@ -1,0 +1,84 @@
+[gd_scene format=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Border" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Border_L" type="ColorRect" parent="Border"]
+anchor_bottom = 1.0
+margin_right = 10.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Border_T" type="ColorRect" parent="Border"]
+anchor_right = 1.0
+margin_bottom = 10.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Border_R" type="ColorRect" parent="Border"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -10.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Border_B" type="ColorRect" parent="Border"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -10.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.0
+margin_top = -110.0
+margin_right = 110.0
+margin_bottom = 110.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Leave_B" type="Button" parent="VBoxContainer"]
+margin_right = 220.0
+margin_bottom = 20.0
+text = "Exit Game"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 220.0
+margin_bottom = 96.0
+size_flags_vertical = 3
+
+[node name="Settings_B" type="Button" parent="VBoxContainer"]
+margin_top = 100.0
+margin_right = 220.0
+margin_bottom = 120.0
+text = "Settings"
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer"]
+margin_top = 124.0
+margin_right = 220.0
+margin_bottom = 196.0
+size_flags_vertical = 3
+
+[node name="Return_B" type="Button" parent="VBoxContainer"]
+margin_top = 200.0
+margin_right = 220.0
+margin_bottom = 220.0
+text = "Back to Game"
