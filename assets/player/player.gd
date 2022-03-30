@@ -1,9 +1,5 @@
 extends KinematicBody
 
-
-onready var mouse : RayCast = $Origin/Camera/RayCast
-onready var debug : Label = $Label
-
 var speed : float = 20
 var acceleration : int = 15
 var gravity : float = 0.98
@@ -12,14 +8,17 @@ var jump_power : float = 20
 var velocity : Vector3
 var y_vel : float
 
+#Mouse
+var inUIMode : bool = false
+var prevloc : Vector2
+
 func _ready():
-	pass
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.warp_mouse_position(Vector2(1280/2,720/2))
 	
 func _physics_process(dt):
 	_movement_handler(dt)
-	
-	#if mouse.is_colliding():
-	debug.text = str(mouse.get_collider())
+	_mouse_handler(dt)
 
 func _movement_handler(dt):
 	#Handle movement using controller
@@ -38,3 +37,23 @@ func _movement_handler(dt):
 	velocity.y = y_vel
 	
 	move_and_slide(velocity,Vector3.UP)
+
+func _mouse_handler(dt):
+	#Handle mouse movment using joystick
+	if inUIMode:
+		var mouse_dir : Vector2 = Vector2(Input.get_action_strength("ui_mouse_right") - Input.get_action_strength("ui_mouse_left"),Input.get_action_strength("ui_mouse_down") - Input.get_action_strength("ui_mouse_up")) + prevloc
+		var mouse_vel : Vector2
+		mouse_vel = mouse_vel.linear_interpolate(mouse_dir * 30, dt * 30)
+		
+		if mouse_vel != Vector2.ZERO:
+			Input.warp_mouse_position(mouse_vel)
+			prevloc = mouse_dir
+	
+	if Input.is_action_just_pressed("ui_toggle"):
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+			inUIMode = true
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			inUIMode = false
+		

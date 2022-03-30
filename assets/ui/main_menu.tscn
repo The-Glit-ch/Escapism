@@ -3,9 +3,6 @@
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Border" type="Control" parent="."]
 anchor_right = 1.0
@@ -50,9 +47,6 @@ margin_left = -110.0
 margin_top = -110.0
 margin_right = 110.0
 margin_bottom = 110.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Leave_B" type="Button" parent="VBoxContainer"]
 margin_right = 220.0
