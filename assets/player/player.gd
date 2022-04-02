@@ -10,20 +10,14 @@ var velocity : Vector3
 var y_vel : float
 
 #Mouse
-onready var mouse : RayCast = $Origin/Camera/Mouse
-
+onready var mouse : RayCast = $Origin/Camera/RayCast
 
 func _ready():
 	pass
-#	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-#	Input.warp_mouse_position(Vector2(1280/2,720/2))
 	
 func _physics_process(dt):
 	_movement_handler(dt)
-	_mouse_handler(dt)
-
-func _fixed_process():
-	pass
+	_mouse_handler()
 
 func _movement_handler(dt):
 	#Handle movement using controller
@@ -41,11 +35,13 @@ func _movement_handler(dt):
 	
 	velocity.y = y_vel
 	
+# warning-ignore:return_value_discarded
 	move_and_slide(velocity,Vector3.UP)
 
-func _mouse_handler(dt):
-	#Handle mouse movment using HMD
+func _mouse_handler():
+	#Handle mouse movment using HMD and controller
 	if mouse.is_colliding():
-		print(mouse.get_collision_normal())
+		var t = transform.affine_inverse() * mouse.get_collision_point()
+		mouse.get_collider().get_node("../../").update_pos(t)
 	
 		
