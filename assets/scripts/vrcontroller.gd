@@ -1,8 +1,7 @@
 extends ARVROrigin
 
-var vr_int = ARVRServer.find_interface("Native mobile")
+var vr = ARVRServer.find_interface("Native mobile")
 
 func _ready():
-	if vr_int and vr_int.initialize():
+	if vr and vr.initialize():
 		get_viewport().arvr = true
-		

@@ -1,7 +1,8 @@
 extends Node
+# Generic global script
 
-#VR Stuff
+# Variables
 var _mvr : MobileVRInterface = MobileVRInterface.new()
 
+# Accessible
 var height : float = _mvr.get_eye_height()
-	

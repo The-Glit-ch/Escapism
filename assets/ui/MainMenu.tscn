@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/scripts/ui_mouse.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/ui/cursor.png" type="Texture" id=2]
 
 [node name="Control" type="Control"]
@@ -86,4 +85,3 @@ margin_top = 10.0
 margin_right = 50.0
 margin_bottom = 50.0
 texture = ExtResource( 2 )
-script = ExtResource( 1 )

@@ -1,27 +1,36 @@
 extends KinematicBody
 
-#Player
-var speed : float = 20
-var acceleration : int = 15
+# Player Movement Variables
+onready var _cam : Camera = $Origin/Camera
+var speed : float = 7
+var acceleration : int = 14
 var gravity : float = 0.98
 var terminal_vel : float = 54
-var jump_power : float = 20
+var jump_power : float = 10
 var velocity : Vector3
 var y_vel : float
 
-#Mouse
-onready var mouse : RayCast = $Origin/Camera/RayCast
+# Player UI Interaction Variables
+onready var _mouse : RayCast = $Origin/Camera/RayCast
 
-func _ready():
-	pass
-	
 func _physics_process(dt):
 	_movement_handler(dt)
-	_mouse_handler()
+	_ui_mouse_handler()
 
 func _movement_handler(dt):
-	#Handle movement using controller
-	var direction : Vector3 = Vector3(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),0,Input.get_action_strength("move_backwards") - Input.get_action_strength("move_foward"))
+	# Handle movement using controller
+	var direction : Vector3
+	var trans : Transform = Transform(transform)
+	trans.basis = _cam.transform.basis
+
+	if Input.is_action_pressed("move_foward"):
+		direction -= trans.basis.z
+	if Input.is_action_pressed("move_backwards"):
+		direction += trans.basis.z
+	if Input.is_action_pressed("move_left"):
+		direction -= trans.basis.x
+	if Input.is_action_pressed("move_right"):
+		direction += trans.basis.x
 	
 	velocity = velocity.linear_interpolate(direction * speed, acceleration * dt)
 	
@@ -35,13 +44,28 @@ func _movement_handler(dt):
 	
 	velocity.y = y_vel
 	
-# warning-ignore:return_value_discarded
 	move_and_slide(velocity,Vector3.UP)
 
-func _mouse_handler():
-	#Handle mouse movment using HMD and controller
-	if mouse.is_colliding():
-		var t = transform.affine_inverse() * mouse.get_collision_point()
-		mouse.get_collider().get_node("../../").update_pos(t)
-	
-		
+func _ui_mouse_handler():
+	# Handle mouse movment using HMD and controller
+	# I spent 3 days trying to get this to work. The fix? Change Vector2(x,y) to Vector2(x,z)
+	if _mouse.is_colliding():
+		# Convert to a relative area
+		var obj = _mouse.get_collider()
+		var panel_size = obj.get_node("../").mesh.size
+		var mouse_pos3d = obj.global_transform.affine_inverse() * _mouse.get_collision_point()
+
+		# 3D to 2D
+		var mouse_pos2d = Vector2(mouse_pos3d.x, mouse_pos3d.z)
+
+		# Convert
+		mouse_pos2d.x += panel_size.x / 2
+		mouse_pos2d.y += panel_size.y / 2
+
+		mouse_pos2d.x = mouse_pos2d.x / panel_size.x
+		mouse_pos2d.y = mouse_pos2d.y / panel_size.y
+
+		mouse_pos2d.x = mouse_pos2d.x * obj.get_node("../../").get_node("Viewport").size.x
+		mouse_pos2d.y = mouse_pos2d.y * obj.get_node("../../").get_node("Viewport").size.y
+
+		obj.get_node("../../").update_cursor(mouse_pos2d)
