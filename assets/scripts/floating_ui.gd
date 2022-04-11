@@ -27,10 +27,7 @@ func _init(properties : Dictionary):
 
 func _update():
 	# Enable mouse option
-	if mouse_enabled == true:
-		mouse.visible = mouse_enabled
-	else:
-		mouse.visible = mouse_enabled
+	mouse.visible = mouse_enabled
 
 	# Match height option
 	if match_height == true:
@@ -40,7 +37,9 @@ func _update():
 
 # Mouse Functionality
 func update_cursor(pos : Vector2):
-	mouse.set_global_position(pos)
+	# Stops game from crashing
+	if is_instance_valid(mouse):
+		mouse.set_global_position(pos)
 
 # Set
 func enable_height_match(value : bool):

@@ -1,7 +1,8 @@
 extends KinematicBody
 
-# Player Movement Variables
-onready var _cam : Camera = $Origin/Camera
+# Player Logic
+# Handles VR mouse and VR movement using HMD and controller
+
 var speed : float = 7
 var acceleration : int = 14
 var gravity : float = 0.98
@@ -10,8 +11,9 @@ var jump_power : float = 10
 var velocity : Vector3
 var y_vel : float
 
-# Player UI Interaction Variables
 onready var _mouse : RayCast = $Origin/Camera/RayCast
+onready var _cam : Camera = $Origin/Camera
+
 
 func _physics_process(dt):
 	_movement_handler(dt)
@@ -53,6 +55,7 @@ func _ui_mouse_handler():
 		# Convert to a relative area
 		var obj = _mouse.get_collider()
 		var panel_size = obj.get_node("../").mesh.size
+		var viewport = obj.get_node("../../").get_node("Viewport")
 		var mouse_pos3d = obj.global_transform.affine_inverse() * _mouse.get_collision_point()
 
 		# 3D to 2D
@@ -65,7 +68,25 @@ func _ui_mouse_handler():
 		mouse_pos2d.x = mouse_pos2d.x / panel_size.x
 		mouse_pos2d.y = mouse_pos2d.y / panel_size.y
 
-		mouse_pos2d.x = mouse_pos2d.x * obj.get_node("../../").get_node("Viewport").size.x
-		mouse_pos2d.y = mouse_pos2d.y * obj.get_node("../../").get_node("Viewport").size.y
+		mouse_pos2d.x = mouse_pos2d.x * viewport.size.x
+		mouse_pos2d.y = mouse_pos2d.y * viewport.size.y
 
 		obj.get_node("../../").update_cursor(mouse_pos2d)
+		
+		# Send fake mouse motion to UI
+		var event = InputEventMouseMotion.new()
+		event.position = mouse_pos2d
+		viewport.input(event)
+		
+		# Trigger left click
+		if Input.is_action_just_pressed("ui_left_click"):
+			var left_click = InputEventMouseButton.new()
+			
+			left_click.pressed = true
+			left_click.button_index = 1
+			left_click.position = mouse_pos2d
+			
+			viewport.input(left_click)
+			
+			left_click.pressed = false
+			viewport.input(left_click)
