@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/ui/UIKeyboard.tres" type="Theme" id=1]
-[ext_resource path="res://assets/textures/ui/cursor.png" type="Texture" id=2]
-[ext_resource path="res://assets/textures/ui/arrow_up.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/themes/UIKeyboard.tres" type="Theme" id=1]
+[ext_resource path="res://assets/textures/ui/arrow_up.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/ui/cursor.png" type="Texture" id=3]
 [ext_resource path="res://assets/scripts/ui/floating_keyboard.gd" type="Script" id=4]
 
 [node name="Control" type="Control"]
@@ -244,7 +244,7 @@ margin_left = 35.0
 margin_right = 142.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
-icon = ExtResource( 3 )
+icon = ExtResource( 2 )
 
 [node name="Z-Btn" type="Button" parent="KeyboardContainer/Row3"]
 margin_left = 146.0
@@ -314,7 +314,7 @@ margin_left = 1137.0
 margin_right = 1244.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
-icon = ExtResource( 3 )
+icon = ExtResource( 2 )
 
 [node name="HSeparator2" type="HSeparator" parent="KeyboardContainer/Row3"]
 margin_left = 1248.0
@@ -396,4 +396,4 @@ size_flags_stretch_ratio = 1.35
 margin_right = 50.0
 margin_bottom = 50.0
 mouse_filter = 2
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )

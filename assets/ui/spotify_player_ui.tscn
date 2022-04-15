@@ -1,0 +1,217 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/textures/ui/cursor.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/ui/failsafe.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/themes/UISpotify.tres" type="Theme" id=3]
+[ext_resource path="res://assets/textures/ui/previous.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/ui/right.png" type="Texture" id=5]
+[ext_resource path="res://assets/scripts/ui/spotify_player_ui.gd" type="Script" id=6]
+
+[node name="SpotifyUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 6 )
+
+[node name="MusicPlayer" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="MusicPlayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0.0666667, 0.12549, 1 )
+
+[node name="SongInfoRow" type="HBoxContainer" parent="MusicPlayer"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -295.0
+margin_bottom = 5.0
+
+[node name="HSeparator" type="HSeparator" parent="MusicPlayer/SongInfoRow"]
+margin_right = 243.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+
+[node name="SongCover" type="TextureRect" parent="MusicPlayer/SongInfoRow"]
+margin_left = 247.0
+margin_right = 537.0
+margin_bottom = 300.0
+texture = ExtResource( 2 )
+
+[node name="HSeparator2" type="HSeparator" parent="MusicPlayer/SongInfoRow"]
+margin_left = 541.0
+margin_right = 785.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+
+[node name="TextInfo" type="VBoxContainer" parent="MusicPlayer/SongInfoRow"]
+margin_left = 789.0
+margin_right = 1032.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+
+[node name="VSeparator" type="VSeparator" parent="MusicPlayer/SongInfoRow/TextInfo"]
+margin_right = 243.0
+margin_bottom = 50.0
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="MusicPlayer/SongInfoRow/TextInfo"]
+margin_top = 54.0
+margin_right = 243.0
+margin_bottom = 121.0
+size_flags_vertical = 1
+text = "Unknown"
+align = 1
+valign = 1
+
+[node name="VSeparator2" type="VSeparator" parent="MusicPlayer/SongInfoRow/TextInfo"]
+margin_top = 125.0
+margin_right = 243.0
+margin_bottom = 175.0
+size_flags_vertical = 3
+
+[node name="Artist" type="Label" parent="MusicPlayer/SongInfoRow/TextInfo"]
+margin_top = 179.0
+margin_right = 243.0
+margin_bottom = 246.0
+size_flags_vertical = 1
+text = "Unknown"
+align = 1
+valign = 1
+
+[node name="VSeparator3" type="VSeparator" parent="MusicPlayer/SongInfoRow/TextInfo"]
+margin_top = 250.0
+margin_right = 243.0
+margin_bottom = 300.0
+size_flags_vertical = 3
+
+[node name="HSeparator3" type="HSeparator" parent="MusicPlayer/SongInfoRow"]
+margin_left = 1036.0
+margin_right = 1280.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+
+[node name="PlaybackInfoRow" type="HBoxContainer" parent="MusicPlayer"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 60.0
+margin_bottom = 235.0
+
+[node name="HSeparator" type="HSeparator" parent="MusicPlayer/PlaybackInfoRow"]
+margin_right = 122.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+
+[node name="CurrentTimeStamp" type="Label" parent="MusicPlayer/PlaybackInfoRow"]
+margin_left = 126.0
+margin_top = 54.0
+margin_right = 252.0
+margin_bottom = 121.0
+text = "00:00"
+
+[node name="HSeparator2" type="HSeparator" parent="MusicPlayer/PlaybackInfoRow"]
+margin_left = 256.0
+margin_right = 378.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="MusicPlayer/PlaybackInfoRow"]
+margin_left = 382.0
+margin_top = 70.0
+margin_right = 897.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.2
+max_value = 1.0
+
+[node name="HSeparator3" type="HSeparator" parent="MusicPlayer/PlaybackInfoRow"]
+margin_left = 901.0
+margin_right = 1023.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+
+[node name="EndtimeStamp" type="Label" parent="MusicPlayer/PlaybackInfoRow"]
+margin_left = 1027.0
+margin_top = 54.0
+margin_right = 1153.0
+margin_bottom = 121.0
+text = "00:00"
+
+[node name="HSeparator4" type="HSeparator" parent="MusicPlayer/PlaybackInfoRow"]
+margin_left = 1157.0
+margin_right = 1280.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+
+[node name="PlaybackOptionsRow" type="HBoxContainer" parent="MusicPlayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -175.0
+
+[node name="HSeparator" type="HSeparator" parent="MusicPlayer/PlaybackOptionsRow"]
+margin_right = 239.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+
+[node name="PrevTrack" type="TextureButton" parent="MusicPlayer/PlaybackOptionsRow"]
+margin_left = 243.0
+margin_top = 37.0
+margin_right = 343.0
+margin_bottom = 137.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+
+[node name="HSeparator2" type="HSeparator" parent="MusicPlayer/PlaybackOptionsRow"]
+margin_left = 347.0
+margin_right = 586.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+
+[node name="PlayPause" type="TextureButton" parent="MusicPlayer/PlaybackOptionsRow"]
+margin_left = 590.0
+margin_top = 37.0
+margin_right = 690.0
+margin_bottom = 137.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 5 )
+
+[node name="HSeparator3" type="HSeparator" parent="MusicPlayer/PlaybackOptionsRow"]
+margin_left = 694.0
+margin_right = 933.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+
+[node name="NextTrack" type="TextureButton" parent="MusicPlayer/PlaybackOptionsRow"]
+margin_left = 937.0
+margin_top = 37.0
+margin_right = 1037.0
+margin_bottom = 137.0
+size_flags_horizontal = 5
+size_flags_vertical = 4
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+flip_h = true
+
+[node name="HSeparator4" type="HSeparator" parent="MusicPlayer/PlaybackOptionsRow"]
+margin_left = 1041.0
+margin_right = 1280.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+
+[node name="Mouse" type="TextureRect" parent="."]
+margin_right = 50.0
+margin_bottom = 50.0
+mouse_filter = 2
+texture = ExtResource( 1 )
