@@ -3,7 +3,7 @@ extends Node
 # Communicates with the Escapism Microservices Server via HTTPRequests
 
 # Connection settings
-var ip : String = "127.0.0.1" # Default
+var ip : String = "10.205.1.102" # Default
 var port : String = "8080" # Default
 
 # Base URI's
@@ -14,7 +14,7 @@ var base_spotify_uri : String = base_uri + "/spotify"
 var _http : HTTPRequest = HTTPRequest.new()
 
 # Enums
-enum Connection {SPOTIFY, YOUTUBE,}
+enum Connection {SPOTIFY, YOUTUBE}
 
 # If server errors out we can just send the prev data again
 var _prev_request_name : String
@@ -47,19 +47,10 @@ func _set_prev_data(name : String, data : Dictionary):
 
 func _request_complete(result, response_code, headers, body):
 	var response : Dictionary = parse_json(body.get_string_from_utf8())
-	
-	# If server fucks up or has an error we get the last function that was called
-	# and call it again passing the prev passed data
-	if response.has("error"):
-		match _prev_request_name:
-			"spotify":
-				request_spotify_data(_prev_request_data)
-		
-	
+
 	# Instead of mass emititng a bunch of signals we just check from which microservice
 	# we got the data from and then emit the callback signal for that microservice
-	if response.from == "spotify":
-		if response.data != null:
-			emit_signal("spotify_return_data", response.data)
-		else:
-			emit_signal("spotify_return_data", {"data": "user not using spotify"})
+	match response.from:
+		"spotify":
+			if response.data != null:
+				emit_signal("spotify_return_data", response.endpoint, response.data)
