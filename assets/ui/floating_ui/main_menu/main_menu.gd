@@ -16,8 +16,9 @@ func update_cursor(pos : Vector2):
 	_ui.update_cursor(pos)
 
 func _connect_btns():
+	$Viewport/Control/VBoxContainer/Settings_B.connect("pressed", self, "_btn_clicked", [$Viewport/Control/VBoxContainer/Settings_B])
 	for btn in Global.return_editable_text_buttons($Viewport/Control):
 		btn.connect('pressed', self, '_btn_clicked', [btn])
 
 func _btn_clicked(btn : Button):
-	Global.show_vr_keyboard(btn.get_node("Label"), panel.transform.origin)
+	Global.show_vr_keyboard(btn.get_node("Label"))

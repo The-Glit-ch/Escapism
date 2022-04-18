@@ -11,12 +11,13 @@ var height : float = _mvr.get_eye_height()
 # Functions
 
 # Handles the spawing of a VR keyboard instance
-func show_vr_keyboard(label : Label, requester_position : Vector3):
+func show_vr_keyboard(label : Label):
 	# Delete the previous keyboard
 	if get_tree().get_nodes_in_group("vr_keyboard").size() > 0:
-		var _prev = get_tree().get_nodes_in_group("vr_keyboard")[0]
-		_prev.queue_free()
-	
+		var _prev = get_tree().get_nodes_in_group("vr_keyboard")
+		for keyboard in _prev:
+			keyboard.queue_free()
+			
 	# Instance the keyboard and make a variable for it
 	var _keyboard = preload('res://assets/ui/floating_ui/popup_keyboard/keyboard.tscn').instance()
 	
@@ -27,9 +28,16 @@ func show_vr_keyboard(label : Label, requester_position : Vector3):
 	# Set text object
 	_ui.textObj = label
 	
-	# Set position
-	_keyboard.transform.origin = Vector3(requester_position.x + 1.5, height / 2, requester_position.z + 1.5)
-	_keyboard.rotation.y = -90
+	# Set position TODO: Re do this entire thing
+	var _spawn_pos : Position3D = get_node("/root/World/Player").get_node("Origin/Camera/KeyboardSpawn")
+	
+	var _spawn_transform : Transform = _spawn_pos.global_transform
+	var _spawn_origin : Vector3 = _spawn_transform.origin
+	var _spawn_basis : Basis = _spawn_transform.basis
+	
+	_keyboard.global_transform.basis = _spawn_basis
+	_keyboard.global_transform.origin = Vector3(_spawn_origin.x, height / 2, _spawn_origin.z)
+	_keyboard.rotate_y(-120 * (PI/180))
 	
 	# Add child to world
 	add_child(_keyboard)
