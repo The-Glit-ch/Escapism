@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "ESLS",
+"language": "GDScript",
+"path": "res://assets/scripts/globals/save_load.gd"
+}, {
 "base": "Reference",
 "class": "FloatingUI",
 "language": "GDScript",
 "path": "res://assets/scripts/floating_ui.gd"
 } ]
 _global_script_class_icons={
+"ESLS": "",
 "FloatingUI": ""
 }
 
@@ -26,8 +32,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://assets/scripts/global.gd"
-EmssClient="*res://assets/scripts/emss_client.gd"
+Global="*res://assets/scripts/globals/global.gd"
+EmssClient="*res://assets/scripts/globals/emss_client.gd"
 
 [display]
 
