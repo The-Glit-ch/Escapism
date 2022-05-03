@@ -19,7 +19,7 @@ func show_vr_keyboard(label : Label):
 			keyboard.queue_free()
 			
 	# Instance the keyboard and make a variable for it
-	var _keyboard = preload('res://assets/ui/floating_ui/popup_keyboard/keyboard.tscn').instance()
+	var _keyboard = preload("res://assets/ui/floating_ui/keyboard/keyboard.tscn").instance()
 	
 	# Set keyboard data
 	# Get a refrence to the UI

@@ -9,7 +9,7 @@ func _ready():
 	}
 	_ui = FloatingUI.new(properties)
 	
-	$Viewport/Control.deletion_connection(self, "_delete_signal")
+	$Viewport/Control.connect("delete", self, "_delete_signal")
 	
 func update_cursor(pos : Vector2):
 	_ui.update_cursor(pos)

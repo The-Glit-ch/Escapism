@@ -23,7 +23,7 @@ func _init(properties : Dictionary):
 
 	# Set UI to eye height if we have a valid object and match height is true
 	if obj != null and match_height == true:
-		obj.transform.origin = Vector3(obj.transform.origin.x, Global.height, obj.transform.origin.z)
+		obj.global_transform.origin = Vector3(obj.global_transform.origin.x, Global.height * 1.5, obj.global_transform.origin.z)
 
 func _update():
 	# Enable mouse option

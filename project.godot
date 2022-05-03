@@ -33,7 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://assets/scripts/globals/global.gd"
-EmssClient="*res://assets/scripts/globals/emss_client.gd"
+Spotify="*res://assets/scripts/globals/spotify.gd"
 
 [display]
 

@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/ui/themes/UIKeyboard.tres" type="Theme" id=1]
+[ext_resource path="res://assets/scripts/ui/keyboard.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/ui/arrow_up.png" type="Texture" id=2]
-[ext_resource path="res://assets/textures/ui/cursor.png" type="Texture" id=3]
-[ext_resource path="res://assets/scripts/ui/floating_keyboard.gd" type="Script" id=4]
+[ext_resource path="res://assets/ui/themes/UIKeyboard.tres" type="Theme" id=3]
+[ext_resource path="res://assets/textures/ui/cursor.png" type="Texture" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-script = ExtResource( 4 )
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -396,4 +396,4 @@ size_flags_stretch_ratio = 1.35
 margin_right = 50.0
 margin_bottom = 50.0
 mouse_filter = 2
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )

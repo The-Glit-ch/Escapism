@@ -21,9 +21,6 @@ func _ready():
 	_loop_through(row_three)
 	_loop_through(row_four)
 
-func deletion_connection(obj, callback : String):
-	connect("delete", obj, callback)
-
 func _loop_through(row : HBoxContainer):
 	for btn in row.get_children():
 		if btn.get_class() == "Button":
